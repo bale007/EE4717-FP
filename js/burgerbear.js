@@ -18,8 +18,6 @@ function gup( name, url ) {
     var results = regex.exec( url );
     return results == null ? null : results[1];
 }
-
-
     
 // Next/previous controls
 function nextSlide() {

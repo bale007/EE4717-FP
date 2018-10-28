@@ -11,7 +11,8 @@ create table User
 		phone varchar(50),
 		email varchar(50),
 		address varchar(50),
-		imgurl text
+		imgurl text,
+		gender varchar(10)
 	);
 
 
@@ -52,11 +53,11 @@ create table User
 
 
 				insert into User values
-					(1,"Jack","jack003","84839283","jack003@foxmail.com","21 lien ying chew","null"),
-					(2,"Bob","Bob001","84839283","Bob@foxmail.com","21 lien ying chew","null"),
-					(3,"Marry","Marry007","84839283","Marry@foxmail.com","21 lien ying chew","null"),
-					(4,"Lisa","Lisa004","84839283","Lisa@foxmail.com","21 lien ying chew","null"),
-					(5,"Ham","Ham001","84839283","Ham@foxmail.com","21 lien ying chew","null");
+					(1,"Jack","jack003","84839283","jack003@foxmail.com","21 lien ying chew","null","Male"),
+					(2,"Bob","Bob001","84839283","Bob@foxmail.com","21 lien ying chew","null","Male"),
+					(3,"Marry","Marry007","84839283","Marry@foxmail.com","21 lien ying chew","null","Male"),
+					(4,"Lisa","Lisa004","84839283","Lisa@foxmail.com","21 lien ying chew","null","Male"),
+					(5,"Ham","Ham001","84839283","Ham@foxmail.com","21 lien ying chew","null","Male");
 
 					insert into Menu values
 						(1,"beefburger","burger","3.2","burger with beef","asset/img/menu/burger/beefburger.jpg"),

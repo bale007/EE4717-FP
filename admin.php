@@ -24,6 +24,24 @@ if($_POST['foodid']){
   $sql = "UPDATE menu set price = ".$_POST['price']." where foodid = ".$_POST['foodid']."";
     $conn->query($sql);
 }
+
+
+if($_POST['orderid']){
+
+  if($_POST['status']=='preparing'){
+  $status = "YOUR FOOD IS BEING PREPARED";
+  }
+  else if($_POST['status']=='deliverying'){
+  $status = "WE ARE DELIVERYING YOUR FOOD";
+  }
+  else if($_POST['status']=='completed'){
+  $status = "YOUR FOOD IS DELIVERED";
+  }
+
+    $sql = "UPDATE foodorder set status = '".$status."' where orderid = ".$_POST['orderid']."";
+    $conn->query($sql);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -86,18 +104,39 @@ if($_POST['foodid']){
        }
        else if($_GET['updateorder']==True){
 
+        $sql = "select * from foodorder";
+
+          $result = $conn->query($sql);
+
+          echo "<table style='margin-top:3%;'>";
+          while($row = $result->fetch_assoc() ){
+           echo "
+           <tr>
+           <form action method='post'>
+                <td>   Order id: ".$row['orderid']."  <input type='hidden' name='orderid' value=".$row['orderid']." >  </td>
+                <td> 
+                Status: <select name='status'>
+                ";
+                ?>
+                <option value='preparing' <?php if($row['status'] == 'YOUR FOOD IS BEING PREPARED'): ?> selected='selected'<?php endif; ?>> Preparing</option>
+                <option value='deliverying'<?php if($row['status'] == 'WE ARE DELIVERYING YOUR FOOD'): ?> selected='selected'<?php endif; ?>>Deliverying</option>
+                <option value='completed' <?php if($row['status'] == 'YOUR FOOD IS DELIVERED'): ?> selected='selected'<?php endif; ?> >Completed</option>
+                <?php
+                echo"
+                </select> </td>
+                <td> <input type='submit' value = 'Update' class='itemadd' style='width:100%;'></td>
+             </form>
+           </tr>              
+           ";
+         };
+          echo "</table>";
        }else{
         echo "
-
-        <a class='itemadd' href='admin.php?viewuser=True'>View Registered User</a>   
+ 
         <a class='itemadd' href='admin.php?updateorder=True'>Update Order Status</a> 
         <a class='itemadd' href='admin.php?updateprice=True'>Update Food Price</a>
-
         ";
       }
-
-
-
       ?>
     </div>
   </div>

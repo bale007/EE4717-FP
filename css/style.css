@@ -78,6 +78,8 @@ body{
 #content{
 	width: 100%;
 	margin:0;
+	overflow:auto;
+	min-width:640px;
 }
 
 
@@ -355,7 +357,7 @@ body{
 	color: white;
 	background-image: linear-gradient(#ec4c34,#d21920);
 	border-radius: 50%;
-	width: 55%;
+	width: 90%;
 	float: right;
 	margin-right: 3%;
 	margin-top: -1%;
@@ -1114,3 +1116,236 @@ background-color: #ccc;
     margin-right: 0%;
     margin-bottom: 10%;
 }
+
+/*------------------------------------------------------------------*/
+
+
+.photo-grid figcaption {
+	background: rgba(0,0,0,0.8);
+	color: white;
+	display: table;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 100;
+}
+
+.photo-grid figcaption p {
+	display: table-cell;
+	font-size: 1.5em;
+	position: relative;
+	top: -40px;
+	width: 289px;
+	vertical-align: middle;
+}
+.photo-grid li:hover figcaption {
+	opacity: 1;
+}
+.photo-grid img {
+	display: block;
+	height: auto;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	transition: all 300ms;
+	max-width: 100%;
+}
+
+.photo-grid li:hover img {
+	-webkit-transform: scale(1.4);
+	-moz-transform: scale(1.4);
+	transform: scale(1.4);
+}
+.photo-grid figcaption p {
+	display: table-cell;
+	font-size: 1.5em;
+	position: relative;
+	top: -40px;
+	width: 289px;
+	-webkit-transition: all 300ms ease-out;
+	-moz-transition: all 300ms ease-out;
+	transition: all 300ms ease-out;
+	vertical-align: middle;
+}
+
+.photo-grid li:hover figcaption p {
+	-moz-transform: translateY(40px);
+	-webkit-transform: translateY(40px);
+	transform: translateY(40px);
+}
+.photo-grid figcaption {
+	background: rgba(0,0,0,0.8);
+	color: white;
+	display: table;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	transition: all 300ms;
+	-webkit-transition-delay: 100ms;
+	-moz-transition-delay: 100ms;
+	transition-delay: 100ms;
+	z-index: 100;
+}
+
+.blanks{
+	width: 100%;
+	font-size:medium;
+    color: black;
+    padding: 1.5%;
+    
+    border-radius: 4px;
+    transition: box-shadow .3s;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px rgba(33,33,33,.2);
+}
+
+.blanks select {
+  background-color: white;
+  color: black;
+  font-size: inherit;
+  padding: 3%;
+  width:100%; 
+  border: 0;
+  margin: 0;
+  border-radius: 4px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: button; 
+}
+
+
+
+.signUpButton {
+    background:  #ec4c34;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    border: 10px;
+    margin: 5px;
+    height: 33px;
+    border-radius: 3px;
+      background-image: linear-gradient(#ec4c34,#d21920);
+}
+
+
+.login{
+	    margin: 20px;
+    margin-top: 34px;
+    background-color:white;
+    width:80%;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px rgba(33,33,33,.2);
+    border-radius: 3px;
+}
+
+.loginSize{
+	font-size:70%;
+}
+
+.description{
+	margin-top: 0;
+    font-size: 70%;
+    color: grey;
+}
+
+
+
+.userprofile {
+  max-width: 1024px;
+  width: 100%;
+  background-color: white;
+}
+
+.topbar {
+  position: relative;
+  background-color: #333333;
+  color: white;
+  height: 125px;
+}
+  .topbar_logo {
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    background-color:white;}
+
+   
+    
+  .topbar_title{
+      margin-inline-start: 30%;
+    }
+
+    
+
+
+  .table-content {
+  width: 100%;
+  max-width: 1024px;
+  border-spacing: 0;
+  
+
+  }
+
+  .table-content tr:nth-child(odd){
+    background-color:#f4f4f4;
+    height:50px;
+    }
+    .table-content th,td{
+      padding: 5px 10px 5px  5px;
+      text-align:left;
+      color: #555;
+      padding-left: 50px;
+    }
+    .table-content td{
+
+    padding-left: 10px;
+    width: 50%;
+    }
+
+
+
+
+
+      .table-content2 {
+  width: 100%;
+  max-width: 1024px;
+  border-spacing: 0;
+  margin:0;
+  
+
+  }
+
+  .table-content2 tr:nth-child(odd){
+    background-color:#f4f4f4;
+    height:50px;
+    }
+    .table-content2 th,td{
+    	width:30%;
+      padding: 5px 10px 5px 5px;
+      color: #555;
+      
+    }
+    .table-content2 td{
+
+    padding-left: 10px;
+    width: 50%;
+    }
+    
+
+    
+  }
+}
+
+
+
+
+
