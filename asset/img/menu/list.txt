@@ -1,0 +1,60 @@
+----Burger----
+CHeese Burger
+Chicken Burger
+Curry Burger
+Guacamole Burger
+Mexico Burger
+New York Grill Burger
+Pax Burger
+SmokyBBQ Burger
+Tower Burger
+Vegan Burger
+
+
+
+
+----Drinks----
+Apple Juice
+Apple Tea
+Blueberry Smoothie
+Honey Lemon
+Lemon Tea
+Orange Juice
+Pineapple Margerita
+Soy milk
+Watermelon
+Wry Grin Cocktail
+
+
+
+----sides----
+Baby Potatoes
+Baked Veggie
+Cracked Marinative Olives
+Crispy Thick Cut Fries
+Fried Rice
+Mexican Style Veggie
+Mini Corn Dogs
+Roasted Shrimp with Tomatoes
+Stewed Veggie
+Sweet Potato Pecan Souffle
+
+
+
+
+----dessert----
+Apple Tart
+Cheese Cake
+Chocolake Gelato
+Coffee Cupcake
+Cream Puff
+Eggtars
+Macarons
+Macha Crepe Cake
+Strawberry Tiramisu
+Waffle
+
+
+
+
+

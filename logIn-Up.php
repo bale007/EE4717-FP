@@ -68,10 +68,10 @@ if (isset($_POST['submit'])) {
     <p><a href="logIn.php">Sign In </a> |  <a > Sign Up</a></p>
     
     <p class='description' style="width:60%">Creating an account will allow you to enjoy exclusive offers and promotions, retrieve saved orders and favorites, and faster checkout.<br></p>
-      <button class='signUpButton' style="width:60%" name=register value=Register href='signUp.php'> REGISTER NOW</button><br>
+      <a href='signUp.php'><button class='signUpButton' style="width:60%" name=register value=Register> REGISTER NOW</button></a><br>
       <a style="font-size:70%">CONTINUE WITHOUT AN ACCOUNT<br></a>
       <a class='description'>Express checkout with online payment as guest</a>
-      <button class='signUpButton' style="width:60%;    margin-bottom: 3.5%;" name=guestorder value=GuestOrder> GUEST ORDER</button><br>
+      <a href='menu.php'><button class='signUpButton' style="width:60%;    margin-bottom: 4.5%;" name=guestorder value=GuestOrder> GUEST ORDER</button></a><br>
 
     
 

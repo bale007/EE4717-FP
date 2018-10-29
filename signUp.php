@@ -52,9 +52,10 @@ $result = mysqli_query($conn, $sql);
 
 if (!$result) 
   echo "<h1 align=center>
+}
 Your query failed.</h1>";
 else{
-  header("Location:Profile.php");
+  echo "Welcome ". $username . ". You are now registered";
 }
 }
 ?>
@@ -74,36 +75,19 @@ else{
 
 <div id="wrapper">
 
-     <div id="header">
-      <?php 
-      if($_SESSION['loggedin']){
-        echo "  <p> <a href='#' >Hello,".$_SESSION['username']."</a> | <a href='logout.php'>Sign out</a></p>
-        ";
-      }else{
-        echo " <p> <a href='logIn.php' >Sign In</a> | <a href='trackorder.php'>Track My Order</a></p> ";
+<div id="header">
+  <p> <a href='#'>Sign In</a> | <a href='#'>Track My Order</a></p>
+</div>
 
-      }
-
-      ?>
-    </div>
-
-    <div id="navigation">
-      <ul>
-        <li style="background-color:#e83214;width: 14%;"><a href="home.php" style='font-family: cursive;padding-top: 9%;'>Burger Bear</a></li>
-        <li><a href="menu.php">Menu</a></li>
-        <?php
-        if($_SESSION['loggedin']==True){
-         echo" <li><a href='Profile.php'>Account</a></li>";
-       }else{
-         echo" <li><a href='logIn.php'>Account</a></li>";
-       }
-
-
-       ?>
-       <li><a href="trackorder.php">TrackOrder</a></li>
-       <li><a href="support.php">Support</a></li>
-     </ul>
-   </div>
+  <div id="navigation">
+    <ul>
+      <li><a href="#">Logo</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Account</a></li>
+      <li><a href="#">TrackOrder</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+  </div>
 
 
   <div id="content">

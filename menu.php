@@ -47,7 +47,7 @@ if(!empty( $_GET['id'])){
 if(!empty($_GET['category'])){
   $category = $_GET['category'];
 }else{
-  $category = "all";
+  $category = "promotion";
 }
 
 //var_dump($_SESSION['cart']);
@@ -131,8 +131,9 @@ if(!empty($_GET['category'])){
    $result = $conn->query($sql);
    while($row = $result->fetch_assoc() ){
 
-     echo " <div class='menuitem'>
-     <img class='itemimg' src=".$row["imgurl"].">
+     echo " <div class='menuitem' >
+     <img   onmouseover='showOverlay(".$row["foodid"].");'  class='itemimg' src='".$row["imgurl"]."'>
+    <div class='overlay' id=".$row["foodid"]." onmouseout='closeOverlay(".$row["foodid"].");'><div class='text'>".$row["description"]."</div></div>
      <p class='itemname'> ".$row["name"]." </p>
      <p class='itemprice'>From $".$row["price"]."</p>
      <a class='itemadd' href='menu.php?category=".$_GET["category"]."&id=".$row["foodid"]."'>Add</a></div>

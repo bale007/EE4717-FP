@@ -44,3 +44,13 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block"; 
   dots[slideIndex-1].className += " active";
 }
+
+function showOverlay(name,self){
+document.getElementById(name).style.opacity = '0.5';
+document.getElementById(name).style.zIndex  = '1000';
+}
+
+function closeOverlay(name){
+document.getElementById(name).style.opacity = '0';
+document.getElementById(name).style.zIndex  = '0';
+}
