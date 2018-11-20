@@ -2,8 +2,8 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
 
 
 // Create connection
@@ -14,15 +14,15 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 
 //echo "seesion id = $id <br>";
 
-
+session_start();
 if(!isset($_SESSION['cart'])){
   $_SESSION['cart'] = array();
 }
-session_start();
+
 
 if(isset($_SESSION['orderid'])){
   unset($_SESSION['orderid']);
@@ -55,6 +55,7 @@ if($_SESSION['loggedin']==True){
 <head>
 
   <link href="css/style.css" rel="stylesheet">
+  <script type="text/javascript" src="js/burgerbear.js"></script>
 
   <title>Burger Bear</title>
 
@@ -116,7 +117,9 @@ if($_SESSION['loggedin']==True){
 
              $whereIn = implode(',', $unique);
 
-             $sql = " select * from menu where foodid in ($whereIn)";
+             
+             $sql = "select * from Menu where foodid in ($whereIn)";
+
 
              $result = $conn->query($sql);
 
@@ -178,26 +181,26 @@ if($_SESSION['loggedin']==True){
 
           <br>
           <label for="cardNumber">CARD NUMBER</label>
-          <input type="text" size="10" class="form-control" name="cardNumber" placeholder="Valid Card Number"  required autofocus />
+          <input type="text" size="10" class="form-control" name="cardNumber" id="cardNumber" placeholder="Valid Card Number"  required autofocus />
 
           <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
           <label for="cardExpir" style="display: block;">EXPIRATION DATE       &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;CV CODE</label> 
-          <input type="text" size="5" class="form-control" name="cardExpiry" placeholder="MM / YY"  required style="width: 50%;display: inline-block;" />
+          <input type="text" size="5" class="form-control" name="cardExpiry" id="cardExpiry" placeholder="MM/YY"  required style="width: 50%;display: inline-block;" />
 
 
-          <input type="text" size="3" class="form-control" name="cardCVC" placeholder="CVC"  required style="width: 39%;display: inline-block;margin-left: 5%;" />
+          <input type="text" size="3" class="form-control" name="cardCVC" id="cardCVC" placeholder="CVC"  required style="width: 39%;display: inline-block;margin-left: 5%;" />
 
           <label for="Name" style="display: block;">FULL NAME</label>
-          <input type="text" size="3" class="form-control" name="Name" placeholder="Name on card"  required />
+          <input type="text" size="3" class="form-control" name="Name" id="Name" placeholder="Name on card"  required />
 
           <label for="contactNumber">CONTACT NUMBER</label>
-          <input type="text" size="3" class="form-control" name="contactNumber" required placeholder="Contact Number" <?php echo " value=".$session_phone."";?>  >
+          <input type="text" size="3" class="form-control" name="contactNumber" id="contactNumber" required placeholder="Contact Number" <?php echo " value=".$session_phone."";?>  >
 
-           <label for="contactNumber">DELIVERY ADDRESS</label>
+           <label for="address">DELIVERY ADDRESS</label>
           <input type="text" size="3" class="form-control" name="address" required placeholder="Delivery Address" <?php echo " value='".$session_address."' ";?>  >
 
           <label for="emailAddress">EMAIL ADDRESS</label>
-          <input type="text" size="3" class="form-control" name="emailAddress" required placeholder="Email Address" <?php echo " value=".$session_email."  ";?>  >
+          <input type="text" size="3" class="form-control" name="emailAddress" id="emailAddress" required placeholder="Email Address" <?php echo " value=".$session_email."  ";?>  >
 
           <?php echo" <input type='hidden' name='totalPrice' value=".$totalprice."> "; ?>
 
@@ -209,6 +212,24 @@ if($_SESSION['loggedin']==True){
         </form>
         <!-- If you're using Stripe for payments -->
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script type="text/javascript">
+          var cardNumber = document.getElementById("cardNumber");
+          var cardExpiry = document.getElementById("cardExpiry");
+          var cardCVC = document.getElementById("cardCVC");
+          var cardName = document.getElementById("Name");
+          var contactNumber = document.getElementById("contactNumber");
+          var emailAddress = document.getElementById("emailAddress");
+          cardNumber.addEventListener("change", chkcardNumber, false);
+          cardExpiry.addEventListener("change", chkcardExpiry, false);
+          cardCVC.addEventListener("change", chkCVC, false);
+          cardName.addEventListener("change", chkcardName, false);
+          contactNumber.addEventListener("change", chkphone, false);
+          emailAddress.addEventListener("change", chkemail, false);
+
+
+
+
+</script>
 
       </div>
 

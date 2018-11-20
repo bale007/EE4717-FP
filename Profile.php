@@ -2,19 +2,18 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
-
+$username = "f38im";
+$password = "f38im";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password,'burger_bear');
+$conn = new mysqli($servername, $username, $password,'f38im');
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 session_start();
 
 
@@ -102,6 +101,7 @@ session_start();
 
         <div class='userprofile'>
   <div class='topbar'>
+
     <div class='topbar_logo'>
       <img style=' 
       width: 100%;
@@ -110,6 +110,7 @@ session_start();
       transform: translateY(-50%);' 
       src='asset/img/profile.png' alt='profile picture'  />
     </div>
+
     <div class='topbar_title'>
       <p style='padding-top: 10px; 
       font-size: 18px;
@@ -133,9 +134,11 @@ session_start();
       text-align: right;
       padding-right: 10px;'>Log Out</p></a>
     </div>
-    </div>
 
-        <div class='profileInfo'>
+
+  </div>
+
+    <div class='profileInfo'>
     <p style='
   color:#fcc423;
   font-size:140%;
@@ -160,7 +163,7 @@ session_start();
           </table>
 
 
-  </div></div>";}
+  </div>";}
 
 
     $query2 = 'select * from FoodOrder '
@@ -177,13 +180,13 @@ session_start();
   margin-left: 15px;'>
   <br><br><b>ORDER HISTORY</b></p>
 
-<table class='table-content2' align='center' >
+<table class='table-content2' align='center'>
           <tr>
-            <th width='33%'>Order ID</th><th width='33%'>Amount</th><th width='33%'>Status</th>
+            <th width='33%'>Order ID</th><th width='33%'>Status</th><th width='33%'>Amount</th>
           </tr>
 
       ";
-
+    if ($result2){
     while($row2 = $result2->fetch_assoc()){
       $orderid = $row2['orderid'];
       $amount = $row2['amount'];
@@ -193,13 +196,19 @@ session_start();
       echo "
 
           <tr>
-            <td>".$orderid."</td><td>".$amount."</td><td>".$status."</td>
+            <td>".$orderid."</td><td>".$status."</td><td>".$amount."</td>
           </tr>
 
       ";
+      }
       
       
     
+    }
+    else{
+      echo "<tr> <th colspan='3'>Looks like you don't have orders. <a href='menu.php'>Start Order Now!</a>
+                 </th>
+            </tr>";
     }
 
     echo"</table>
@@ -207,18 +216,15 @@ session_start();
 
   </div>
 
-  </div>
+  
 
-  <div id='copyright' style='width:100%'>
-   <p> COPYRIGHT © 2018 ALL RIGHTS RESERVED BY BURGERBEAR'S® <br>
-    THE BURGER BEAR LOGOS ARE TRADEMARKS OF BURGERBEAR'S CORPORATION AND ITS AFFILIATES. </p>
-  </div>";
+  ";
 
 
   }
 
 else{
-  header('Location: Profile.php');
+  header('Location: logIn.php');
 }
 
 
@@ -235,14 +241,12 @@ else{
 
 
 
-
-
-
-
- 
-
 </div>
-
+<div id='copyright' style='width:100%'>
+   <p> COPYRIGHT © 2018 ALL RIGHTS RESERVED BY BURGERBEAR'S® <br>
+    THE BURGER BEAR LOGOS ARE TRADEMARKS OF BURGERBEAR'S CORPORATION AND ITS AFFILIATES. </p>
+  </div>
+</div>
 
 </body>
 

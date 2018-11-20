@@ -2,32 +2,32 @@
 <?php
 
 
-
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
+
 
 
 // Create connection
-$conn = new mysqli($servername, $username, $password,'burger_bear');
+$conn = new mysqli($servername, $username, $password,'f38im');
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-//mysqli_select_db($conn,"burger_bear");
+//mysqli_select_db($conn,"f38im");
 session_start();
 
 
 $cookie_username = null;
 $cookie_password = null;
-$cookie_re = 'off';
+$cookie_re = '';
 if(isset($_COOKIE['username'])) {
 
    $cookie_username=$_COOKIE['username'];
-  $cookie_password=$_COOKIE['password'];
-  $cookie_re = 'on';
+ // $cookie_password=$_COOKIE['password'];
+  $cookie_re = 'checked';
   //echo 'mail'.$usermail.'pass'.$password;
 }
 
@@ -40,12 +40,13 @@ if (isset($_POST['submit'])) {
                     }
 
 
-  if (empty($_POST['mail']) || empty ($_POST['password'])) {
+  if (empty($_POST['email']) || empty ($_POST['password'])) {
   echo "All blanks should be filled in";
   exit;}
 
-  $usermail=$_POST['mail'];
+  $usermail=$_POST['email'];
   $password=$_POST['password'];
+  $password = md5($password);
   //echo 'mail'.$usermail.'pass'.$password;
 
   $query = 'select * from User '
@@ -72,10 +73,7 @@ if (isset($_POST['submit'])) {
   $conn->close();
 }
 
-
-
-
-
+$_POST = array();
 
 ?>
 
@@ -136,39 +134,18 @@ if (isset($_POST['submit'])) {
 
 if (isset($_SESSION['userid']))
   {
-    echo 'You are logged in as: '.$_SESSION['userid'].' <br />';
-    echo "<a href='profile.php'> View Profile</a>";
-
-
-
-
-
-
-
-
-
-
-
-
-
+    header("Location:Profile.php");
 
   }
 
 
-
-
-
-
-
-
-
-  else
+else
   {
     if (isset($usermail))
     {
       
       echo "<div class='login' align=center >
-      <h3 style='width:70%''>Log in failed:( <br> Email not found or password wrong.</h3>";
+      <h3 style='width:70%'>Log in failed:( <br> Email not found or password wrong.</h3>";
     }
     else 
     {
@@ -177,22 +154,42 @@ if (isset($_SESSION['userid']))
        <h2 style='width:60%'> Welcome. Sign in to start ordering.</h2>";
     }
 
+    if($_GET['ImNew']==True){
+      echo "
+    
+    <p><a href='logIn.php'>Sign In </a> |  <a > I'm New</a></p>
+    
+    <p class='description' style='width:60%'>Creating an account will allow you to enjoy exclusive offers and promotions, retrieve saved orders and favorites, and faster checkout.<br></p>
+      <a href='signUp.php'><button class='signUpButton' style='width:60%;    margin-bottom: 26px;' name=register value=Register> REGISTER NOW</button></a><br>
+      <a style='font-size:85%'>CONTINUE WITHOUT AN ACCOUNT<br></a>
+      <a class='description'>Express checkout with online payment as guest</a>
+      <a href='menu.php'><button class='signUpButton' style='width:60%;    margin-bottom: 4.5%;' name=guestorder value=GuestOrder> GUEST ORDER</button></a><br>
 
+    
+
+
+  </div>";
+    }
+    else{
 
     echo "
  
     
-    <p><a>Sign In </a> |  <a href='signUp.php'> Sign Up</a></p>
+    <p><a>Sign In </a> |  <a href='logIn.php?ImNew=True' style='color:#3d3d3d;'> I'm New</a></p>
     <form action='logIn.php' method=POST>
     <table>
       <tr>
-        <input type='text' class='blanks' style='width:60%;    padding: 3%;' placeholder='Registered Email' name='mail' value=".$cookie_username." required>
+        <input type='text' class='blanks' style='width:60%;    padding: 3%;' placeholder='Registered Email' name='email' required value=".$cookie_username." >
         </tr>
         <tr>
-        <input type='password' class='blanks' style='width:60%;    padding: 3%;' placeholder='Password' name='password' value=".$cookie_password." required>
+        <input type='password' class='blanks' style='width:60%;    padding: 3%;' placeholder='Password' name='password' required value=".$cookie_password." >
         </tr>
         <tr >
-        <br><input type='checkbox' name='remember_me' value='remember_me' style='position: relative;  width:25px; height:25px;' >Remember Me<br>
+        <br><input type='checkbox' name='remember_me' style='position: relative;  width:25px; height:25px;     margin-top: 2%;   margin-left: 39%;' ".$cookie_re." ><font style='
+    float: right;
+    margin-right: 35%;
+    margin-top: 2%;
+'>Remember Me</font><br>
       </tr>
       <button type='submit' class='signUpButton' style='width:60%;' name=submit value=Submit >Log In</button><br>
       <a style='font-size:small' href='signUp.php'> Don't have an account? Click to sign up!</a>
@@ -201,7 +198,7 @@ if (isset($_SESSION['userid']))
 
 
   
-  </div>";
+  </div>";}
 
 
 

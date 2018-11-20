@@ -2,8 +2,8 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
 
 
 // Create connection
@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 } 
 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 session_start();
 $ak = "";
 
@@ -92,7 +92,7 @@ if ($_POST['feedback']!=null) {
   <div id="content" >
     <div class='payment' style='overflow:auto; margin:3%'>
     <div  style='width:50%; float:left'>
-    <img src="asset\img\map.PNG"  style='width:100%;margin-top:20px;border: 1px solid #ddd;padding:5px'>
+    <img src="asset\img\map.png"  style='width:100%;margin-top:20px;border: 1px solid #ddd;padding:5px'>
   </div>
   <div  style='width:50%; float:left;padding:6%;'>
    <p >

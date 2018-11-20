@@ -2,8 +2,8 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
 
 
 // Create connection
@@ -14,14 +14,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 
 //echo "seesion id = $id <br>";
 
 session_start();
 
 if($_POST['foodid']){
-  $sql = "UPDATE menu set price = ".$_POST['price']." where foodid = ".$_POST['foodid']."";
+  $sql = "UPDATE Menu set price = ".$_POST['price']." where foodid = ".$_POST['foodid']."";
     $conn->query($sql);
 }
 
@@ -38,7 +38,7 @@ if($_POST['orderid']){
   $status = "YOUR FOOD IS DELIVERED";
   }
 
-    $sql = "UPDATE foodorder set status = '".$status."' where orderid = ".$_POST['orderid']."";
+    $sql = "UPDATE FoodOrder set status = '".$status."' where orderid = ".$_POST['orderid']."";
     $conn->query($sql);
 }
 
@@ -84,7 +84,7 @@ if($_POST['orderid']){
         }
         else if($_GET['updateprice']==True){
 
-          $sql = "select * from menu";
+          $sql = "select * from Menu";
 
           $result = $conn->query($sql);
           while($row = $result->fetch_assoc() ){
@@ -104,7 +104,7 @@ if($_POST['orderid']){
        }
        else if($_GET['updateorder']==True){
 
-        $sql = "select * from foodorder";
+        $sql = "select * from FoodOrder";
 
           $result = $conn->query($sql);
 
@@ -130,11 +130,65 @@ if($_POST['orderid']){
            ";
          };
           echo "</table>";
-       }else{
+       }
+       else if ($_GET['getreport']==True){
+
+            echo " <h2 style='margin-left:5%;'>Highest Sales by product category </h2> ";
+            echo " <table border=0 style='margin-left:5%; align:center;'>
+                <tr>
+                  <th>Category  </th>
+                  <th>Total (number)  </th>
+                  <th>Total (dollars) </th>
+                <tr> ";
+            
+            $sql = "select category, sum(quantity), sum(amount) from SalesOrder group by category order by sum(amount) Desc";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()){
+         
+         echo "<tr>
+                   <td>".$row['category']."</td>
+                   <td>".$row['sum(quantity)']."</td>
+                   <td>".$row['sum(amount)']."</td> 
+              </tr>";
+      }
+    echo "</table>";
+
+
+
+                echo " <h2 style='margin-left:5%;'>Highest Sales by product name </h2> ";
+            echo " <table border=0 style='margin-left:5%; width:80%; ' >
+                <tr>
+                  <th>Product id </th>
+                  <th>Product name </th>
+                  <th>Total (number)  </th>
+                  <th>Total (dollars) </th>
+                <tr> ";
+            
+            $sql = "select foodid, sum(quantity), sum(amount) from SalesOrder group by foodid order by sum(amount) Desc";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()){
+              $foodid = $row['foodid'];
+            $sql_name = "select name from Menu where foodid = $foodid";
+            $result_name = $conn->query($sql_name);
+            while ($row_name = $result_name->fetch_assoc()){
+                $name = $row_name['name'];
+            }
+         echo "<tr>
+                   <td>".$row['foodid']."</td>
+                   <td>".$name."</td>
+                   <td>".$row['sum(quantity)']."</td>
+                   <td>".$row['sum(amount)']."</td> 
+              </tr>";
+      }
+    echo "</table>";
+       }
+
+       else{
         echo "
  
         <a class='itemadd' href='admin.php?updateorder=True'>Update Order Status</a> 
         <a class='itemadd' href='admin.php?updateprice=True'>Update Food Price</a>
+        <a class='itemadd' href='admin.php?getreport=True'>Generate Sales Report</a> 
         ";
       }
       ?>

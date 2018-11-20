@@ -1,9 +1,9 @@
 
 <?php
-
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
+
 
 
 // Create connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 
 //echo "seesion id = $id <br>";
 
@@ -47,11 +47,41 @@ if(!isset($_SESSION['orderid'])){
   $orderid =  $_SESSION['orderid'] ;
   $ETA =  $_SESSION['ETA'];
 }
+if($userid=="0"){
+$sql = "insert into FoodOrder (orderid,amount,status,foodlist,address,contact,timestamp) values(".$orderid.",".$totalPrice.",'".$status."','".$cart."','".$address."','".$contact."',".$date.")";
+}else{
+  $sql = "insert into FoodOrder values(".$orderid.",".$userid.",".$totalPrice.",'".$status."','".$cart."','".$address."','".$contact."',".$date.")";
+}
 
-$sql = "insert into foodorder values(".$orderid.",".$userid.",".$totalPrice.",'".$status."','".$cart."','".$address."','".$contact."',".$date.")";
 
 $result = $conn->query($sql);
 
+
+$exploded=explode(" ",$cart);
+
+$unique = array_unique($exploded);
+
+$whereIn = implode(',', $unique);
+
+$sql2 = " select * from Menu where foodid in ($whereIn)";
+
+$result2 = $conn->query($sql2);
+
+$duplicate = array_count_values($exploded);
+
+        if($userid=="0")$userid="null";
+while($row = $result2->fetch_assoc() ){
+
+        
+        $qty = $duplicate[$row['foodid']];
+        $foodid = $row['foodid'];
+        $category = $row['category'];
+        $totalPrice = $qty*$row['price'];
+
+        $sql_sales = "INSERT into SalesOrder values($orderid,$userid,$foodid,$totalPrice,$qty,'$category')";
+        $result_sales = $conn->query($sql_sales);
+
+      }
 
 
           //clear session cart
@@ -109,7 +139,7 @@ $_SESSION['cart'] = array();
 
       <?php
 
-      $sql = "select * from foodorder where orderid = ".$orderid;
+      $sql = "select * from FoodOrder where orderid = ".$orderid;
 
       $result = $conn->query($sql);
 
@@ -161,7 +191,7 @@ $_SESSION['cart'] = array();
 
       $whereIn = implode(',', $unique);
 
-      $sql = " select * from menu where foodid in ($whereIn)";
+      $sql = " select * from Menu where foodid in ($whereIn)";
 
       $result = $conn->query($sql);
 

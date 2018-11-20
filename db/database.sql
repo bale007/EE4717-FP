@@ -1,7 +1,15 @@
 
-use burger_bear;
+use f38im;
+
+drop table if exists FoodOrder;
+
+drop table if exists Menu;
 
 drop table if exists User;
+
+drop table if exists Feedback;
+
+drop table if exists SalesOrder;
 
 create table User
 	(
@@ -9,14 +17,13 @@ create table User
 		username varchar(50),
 		password varchar(50),
 		phone varchar(50),
-		email varchar(50),
+		email varchar(50) UNIQUE,
 		address varchar(50),
-		imgurl text,
 		gender varchar(10)
-	);
+		);
 
 
-	drop table if exists Menu;
+
 
 	create table Menu
 		(
@@ -26,40 +33,46 @@ create table User
 			price varchar(50),
 			description text,
 			imgurl text
-		);
+			);
 
-		drop table if exists FoodOrder;
+
 
 		create table FoodOrder
 			(
 				orderid varchar(50)  not null primary key,
-				userid int unsigned not null,
+				userid int unsigned,
 				amount float(6,2),
 				status varchar(50),
 				foodlist varchar(50),
 				address text,
 				contact varchar(20),
-				timestamp varchar(50)
-			);
-
-			drop table if exists Feedback;
-
-			create table Feedback
-				(
-					userid int unsigned not null,
-					date date not null,
-					feedback text
+				timestamp varchar(50),
+				FOREIGN KEY (userid) REFERENCES User(userid)
 				);
 
 
-				insert into User values
-					(1,"Jack","jack003","84839283","jack003@foxmail.com","21 lien ying chew","null","Male"),
-					(2,"Bob","Bob001","84839283","Bob@foxmail.com","21 lien ying chew","null","Male"),
-					(3,"Marry","Marry007","84839283","Marry@foxmail.com","21 lien ying chew","null","Male"),
-					(4,"Lisa","Lisa004","84839283","Lisa@foxmail.com","21 lien ying chew","null","Male"),
-					(5,"Ham","Ham001","84839283","Ham@foxmail.com","21 lien ying chew","null","Male");
+			create table SalesOrder
+				(
+					orderid varchar(50)  not null,
+					userid int unsigned,
+					foodid int,
+					amount float(6,2),
+					quantity int,
+					category varchar(50),
+					FOREIGN KEY (userid) REFERENCES User(userid)
+					);
 
-				insert into Menu (name,category,price,description,imgurl) values
+				create table Feedback
+					(
+						userid int unsigned not null,
+						date date not null,
+						feedback text
+						);
+
+
+
+
+					insert into Menu (name,category,price,description,imgurl) values
 
 						("Cheese Burger","burger","3.2","hamburger topped with cheese","asset/img/menu/burger/CheeseBurger.jpg"),
 						("Chicken Burger","burger","4.2","sandwich made of a patty of chicken in a bun","asset/img/menu/burger/ChickenBurger.jpg"),
@@ -83,7 +96,7 @@ create table User
 						("Watermelon Juice","drink","1.3","made with real watermelon","asset/img/menu/drink/WatermelonJuice.jpg"),
 						("Wry Grin Cocktail","drink","4.2","cocktail made with wry grin","asset/img/menu/drink/WryGrinCocktail.jpg"),
 
-						
+
 						("Baby Potatoes","sides","4.2","roasted Potatoes","asset/img/menu/sides/BabyPotatoes.jpg"),
 						("Baked Veggie","sides","3.3","backed style veggie","asset/img/menu/sides/BakedVeggie.jpg"),
 						("Cracked Marinative Olives","sides","3.8","made with real olives","asset/img/menu/sides/CrackedMarinativeOlives.jpg"),
@@ -95,7 +108,7 @@ create table User
 						("Stewed Veggie","sides","4.2","a Stewed style veggie","asset/img/menu/sides/StewedVeggie.jpg"),
 						("Sweet Potato Pecan Souffle","sides","3.5","a very nice sweet potato","asset/img/menu/sides/SweetPotatoPecanSouffle.jpg"),
 
-				
+
 						("Apple Tart","dessert","1.2","tart with apple","asset/img/menu/dessert/AppleTart.jpg"),
 						("Cheese Cake","dessert","3.2","cake with cheese","asset/img/menu/dessert/CheeseCake.jpg"),
 						("Chocolake Gelato","dessert","3.4","gelato made of chocolake","asset/img/menu/dessert/ChocolateGelato.jpg"),

@@ -2,8 +2,9 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
+
 
 
 // Create connection
@@ -14,7 +15,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 
 //echo "seesion id = $id <br>";
 
@@ -79,7 +80,7 @@ session_start();
 
       if(!empty($_POST['orderid'])){
 
-        $sql = "select * from foodorder where orderid = ".$_POST['orderid'];
+        $sql = "select * from FoodOrder where orderid = ".$_POST['orderid'];
 
         $result = $conn->query($sql);
 
@@ -136,7 +137,7 @@ session_start();
 
           $whereIn = implode(',', $unique);
 
-          $sql = " select * from menu where foodid in ($whereIn)";
+          $sql = " select * from Menu where foodid in ($whereIn)";
 
           $result = $conn->query($sql);
 

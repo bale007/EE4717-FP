@@ -2,8 +2,8 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "f38im";
+$password = "f38im";
 
 
 // Create connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-mysqli_select_db($conn,"burger_bear");
+mysqli_select_db($conn,"f38im");
 
 session_start();
 
@@ -106,7 +106,7 @@ if(!empty($_GET['category'])){
    <div id="content">
 
     <div id = "leftmenu">
-     <a href="menu.php?"><p>Food Menu</p></a>
+     <a><p>Food Menu</p></a>
      <ul>
       <a href="menu.php?category=promotion" id="menu_promotion"><li>Promotion</li></a>
       <a href="menu.php?category=burger"  id="menu_burger"  ><li>Burger</li></a>
@@ -123,9 +123,9 @@ if(!empty($_GET['category'])){
     echo "<p id='trace'> Menu > ". $temp."</p>";
 
     if($category=="all"){
-     $sql = "select * from menu";
+     $sql = "select * from Menu";
    }else{
-     $sql = "select * from menu where category = '".$category."'";
+     $sql = "select * from Menu where category = '".$category."'";
    }
    
    $result = $conn->query($sql);
@@ -139,8 +139,6 @@ if(!empty($_GET['category'])){
      <a class='itemadd' href='menu.php?category=".$_GET["category"]."&id=".$row["foodid"]."'>Add</a></div>
      ";
    };
-
-
    ?>
 
  </div>
@@ -162,7 +160,7 @@ if(!empty($_GET['category'])){
 
       $whereIn = implode(',', $unique);
 
-      $sql = " select * from menu where foodid in ($whereIn)";
+      $sql = " select * from Menu where foodid in ($whereIn)";
 
       $result = $conn->query($sql);
 
